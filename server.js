@@ -3,6 +3,10 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import authRoutes from './routes/authroutes.js'
+import scheduleRoutes from "./routes/scheduleRoutes.js";
+import ownerRoutes from './routes/ownerRoutes.js';
+import userRoutes from './routes/userRoutes.js'
+
 
 
 dotenv.config();
@@ -19,4 +23,7 @@ mongoose.connect(process.env.MONGO_URI)
     })
     .catch(err => console.log(err));
 
-app.use('/api/auth', authRoutes)
+app.use('/api/auth', authRoutes);
+app.use('/api/auth', ownerRoutes)
+app.use("/api/schedules", scheduleRoutes);
+app.use('/api/profile', userRoutes)
