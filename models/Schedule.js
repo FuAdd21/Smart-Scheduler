@@ -18,9 +18,14 @@ const scheduleSchema = new mongoose.Schema(
     isBooked: {
         type: Boolean,
         default: false
+    },
+    client: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     }
     },
     { timestamps: true }
+    
 );
 
 export default mongoose.model("Schedule", scheduleSchema);
