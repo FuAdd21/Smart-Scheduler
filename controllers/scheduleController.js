@@ -45,6 +45,12 @@ export const bookSchedule = async (req, res) => {
 
     res.json({ message: "Booked successfully"});
 
+    await Notification.create({
+  user: schedule.owner,
+  message: "A client booked your schedule"
+});
+
+
   } catch(error) {
     res.status(500).json({ message: error.message});
   }
@@ -61,4 +67,56 @@ export const getOwnerBookedSchedule = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+export const cancelBooked = async (req, res) => {
+  const schedule = await Schedule.findById(req.params.id)
 
+  if(!schedule) {
+    return res.status(404).json({message: "schedule not found"})
+  }
+  if(
+     schedule.client?.toString() !== req.user.id &&
+    req.user.role !== "owner"
+) {
+   return res.status(403).json({ message: "Not allowed" });
+};
+
+schedule.isBooked = false;
+  schedule.client = null;
+
+  await schedule.save();
+
+  res.json({ message: "Booking cancelled" });
+
+
+};
+
+export const updateSchedule = async (req, res) => {
+  const schedule = await Schedule.findById(req.params.id);
+
+  if (!schedule) {
+    return res.status(404).json({ message: "Schedule not found" });
+  }
+
+  schedule.date = req.body.date || schedule.date;
+  schedule.time = req.body.time || schedule.time;
+
+  await schedule.save();
+
+  res.json(schedule);
+};
+export const delateSchedule = async (req, res) => {
+  const schedule = await Schedule.findById(req.params.id);
+
+  if (!schedule) {
+    return res.status(404).json({ message: "Schedule not found" });
+  }
+
+  await schedule.deleteOne();
+
+  res.json({ message: "Schedule deleted" });
+}
+
+export const notification = async (req, res) => {
+  const notes = await Notification.find({ user: req.user.id });
+  res.json(notes);
+};
