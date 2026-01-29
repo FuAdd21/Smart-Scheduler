@@ -49,23 +49,23 @@ It supports **role-based access** for Owners and Clients and includes a basic no
 ## API Endpoints (Examples)
 
 ### Auth
-POST /api/auth/register
-POST /api/auth/login
+- POST /api/auth/register
+- POST /api/auth/login
 
 ### Owner
-GET /api/auth/owner-dashboard
-POST /api/schedules/create
-PUT /api/schedules/:id/cancel
-DELETE /api/schedules/:id/delate
-GET /api/schedules/owner/booked
+- GET /api/auth/owner-dashboard
+- POST /api/schedules/create
+- PUT /api/schedules/:id/cancel
+- DELETE /api/schedules/:id/delate
+- GET /api/schedules/owner/booked
 
 ### Client
-POST /api/bookings/:scheduleId/create
-DELETE /api/bookings/:bookingId/delate
+- POST /api/bookings/:scheduleId/create
+- DELETE /api/bookings/:bookingId/delate
 
 ---
 
-### Environment Variables
+## Environment Variables
 Create a `.env` file in the root folder:
 
 PORT=5000
@@ -74,7 +74,6 @@ PORT=5000
 
 ---
 
-### Run Locally
+## Run Locally
 - npm install
-- 
 - npm run dev
