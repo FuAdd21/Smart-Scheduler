@@ -65,15 +65,16 @@ DELETE /api/bookings/:bookingId/delate
 
 ---
 
-## Environment Variables
+### Environment Variables
 Create a `.env` file in the root folder:
 
 PORT=5000
-MONGO_URI=your_mongodb_connection
-JWT_SECRET=your_secret_key
+- MONGO_URI=your_mongodb_connection
+- JWT_SECRET=your_secret_key
 
 ---
 
-## Run Locally
-npm install
-npm run dev
+### Run Locally
+- npm install
+- 
+- npm run dev
