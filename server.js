@@ -28,3 +28,4 @@ app.use('/api/auth', ownerRoutes)
 app.use("/api/schedules", scheduleRoutes);
 app.use('/api/profile', userRoutes)
 app.use('/api/schedules', bookingRoutes)
+

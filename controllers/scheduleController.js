@@ -49,3 +49,16 @@ export const bookSchedule = async (req, res) => {
     res.status(500).json({ message: error.message});
   }
 };
+export const getOwnerBookedSchedule = async (req, res) => {
+  try {
+    const schedules = await Schedule.find({
+      owner: req.user._id,
+      iaBooked: true
+    }).populate("client", "name email");
+
+    res.json(schedules);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
