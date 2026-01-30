@@ -1,50 +1,79 @@
-# Smart Scheduler – Appointment Booking System
+# Smart Scheduler – Backend
 
-Smart Scheduler is a backend appointment management system for small businesses.  
-It allows business owners to create available time slots and clients to book them securely.
+## Overview
+Smart Scheduler is a backend API that allows users to create, book, manage, and cancel appointment schedules.  
+It supports **role-based access** for Owners and Clients and includes a basic notification system.
+
+---
+
+## Tech Stack
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+- bcryptjs
+- CORS
+- dotenv
 
 ---
 
 ## Features
 
-- User Registration & Login (JWT Authentication)
-- Role-Based Access (Owner / Client)
-- Owner Dashboard
-- Create Available Schedules
-- View Available Time Slots
-- Book Appointments
-- Double-Booking Prevention
-- MongoDB Database Integration
+### Authentication
+- Register User
+- Login User
+- JWT Token Generation
+- Password Hashing
+
+### Roles
+- Client
+- Owner
+- Owner-only route protection
+
+### Schedule Management (Owner)
+- Create Schedule
+- Update Schedule
+- Delete Schedule
+- View Booked Schedules
+
+### Booking (Client)
+- Book Schedule
+- Cancel Booking
+
+### Notifications
+- Basic notification logic for booking and cancellation actions
 
 ---
 
-## Tech Stack
+## API Endpoints (Examples)
 
-- Node.js
-- Express.js
-- MongoDB & Mongoose
-- JSON Web Tokens (JWT)
-- REST API
-- Postman for Testing
+### Auth
+- POST /api/auth/register
+- POST /api/auth/login
 
----
+### Owner
+- GET /api/auth/owner-dashboard
+- POST /api/schedules/create
+- PUT /api/schedules/:id/cancel
+- DELETE /api/schedules/:id/delate
+- GET /api/schedules/owner/booked
 
-## API Endpoints
-
-| Method | Endpoint | Description |
-|-------|---------|-------------|
-| POST | /api/auth/register | Register new user |
-| POST | /api/auth/login | Login user |
-| GET | /api/schedules | View available schedules |
-| POST | /api/schedules | Owner creates schedule |
-| PUT | /api/schedules/:id/book | Client books schedule |
-| GET | /api/auth/owner-dashboard | Owner only dashboard |
+### Client
+- POST /api/bookings/:scheduleId/create
+- DELETE /api/bookings/:bookingId/delate
 
 ---
 
-## Installation & Setup
+## Environment Variables
+Create a `.env` file in the root folder:
 
-1. Clone the repository
-2. Install dependencies
-   ```bash
-   npm install
+PORT=5000
+- MONGO_URI=your_mongodb_connection
+- JWT_SECRET=your_secret_key
+
+---
+
+## Run Locally
+- npm install
+- npm run dev
