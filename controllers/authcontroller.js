@@ -6,7 +6,7 @@ const generateToken = (id) =>
 
 export default generateToken;
 
-export const registerUser = async (req, res) => {
+export const registerUser = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
 
@@ -23,9 +23,10 @@ export const registerUser = async (req, res) => {
       email: user.email,
       token: generateToken(user._id),
     });
-  } catch (error) {
-    console.log(error) // forward to Express error handler
-  }
+  } catch(error) {
+  next(error);
+}
+
 };
 export const loginUser = async (req, res) => {
   try {
@@ -44,6 +45,6 @@ export const loginUser = async (req, res) => {
       res.status(401).json({ message: "Invalid email or password" });
     }
   } catch (error) {
-    //next(error); // forward to Express error handler
+    next(error); // forward to Express error handler
   }
 };

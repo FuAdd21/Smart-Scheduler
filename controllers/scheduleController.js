@@ -1,6 +1,6 @@
 import Schedule from "../models/Schedule.js";
 
-export const createSchedule = async (req, res) => {
+export const createSchedule = async (req, res, next) => {
   try {
     const { date, time } = req.body;
 
@@ -11,22 +11,22 @@ export const createSchedule = async (req, res) => {
     });
 
     res.status(201).json(schedule);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+  } catch(error) {
+  next(error);
+}
+
 };
 
 export const getAvailableSchedule = async (req, res) => {
   try {
     const schedules = await Schedule.find({ isBooked: false});
     res.json(schedules);
-  } catch (error) {
-    res.status(500).json({ messagae: error.message});
-
-  };
+  } catch(error) {
+  next(error);
+};
 };
 
-export const bookSchedule = async (req, res) => {
+const bookSchedule = async (req, res) => {
   try {
     const schedule = await Schedule.findById(req.params.id);
 
@@ -52,9 +52,11 @@ export const bookSchedule = async (req, res) => {
 
 
   } catch(error) {
-    res.status(500).json({ message: error.message});
+    next(error);
   }
+
 };
+export default bookSchedule
 export const getOwnerBookedSchedule = async (req, res) => {
   try {
     const schedules = await Schedule.find({
@@ -62,10 +64,11 @@ export const getOwnerBookedSchedule = async (req, res) => {
       iaBooked: true
     }).populate("client", "name email");
 
-    res.json(schedules);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+   return res.json(schedules);
+  }catch(error) {
+      next(error);
+    }
+
 };
 export const cancelBooked = async (req, res) => {
   const schedule = await Schedule.findById(req.params.id)
@@ -119,4 +122,31 @@ export const delateSchedule = async (req, res) => {
 export const notification = async (req, res) => {
   const notes = await Notification.find({ user: req.user.id });
   res.json(notes);
+};
+
+export const getSchedules = async (req, res) => {
+  const query = {};
+
+  if (req.query.date) query.date = req.query.date;
+  if (req.query.owner) query.owner = req.query.owner;
+
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 5;
+
+  const skip = (page - 1) * limit;
+
+  const total = await Schedule.countDocuments(query);
+
+  const schedules = await Schedule.find(query)
+    .populate("owner", "name email")
+    .skip(skip)
+    .limit(limit)
+    .sort({ date: 1 });
+
+  res.json({
+    total,
+    page,
+    pages: Math.ceil(total / limit),
+    data: schedules
+  });
 };

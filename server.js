@@ -7,6 +7,8 @@ import scheduleRoutes from "./routes/scheduleRoutes.js";
 import ownerRoutes from './routes/ownerRoutes.js';
 import userRoutes from './routes/userRoutes.js'
 import bookingRoutes from './routes/bookingRoutes.js'
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
+
 
 
 dotenv.config();
@@ -28,4 +30,6 @@ app.use('/api/auth', ownerRoutes)
 app.use("/api/schedules", scheduleRoutes);
 app.use('/api/profile', userRoutes)
 app.use('/api/schedules', bookingRoutes)
+app.use(notFound);
+app.use(errorHandler);
 
