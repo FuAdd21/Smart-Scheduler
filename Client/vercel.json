@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "name": "smart-scheduler-client",
+  "framework": "vite",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
