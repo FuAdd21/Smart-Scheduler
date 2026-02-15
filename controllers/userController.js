@@ -14,21 +14,29 @@ if (!user) {
     return res.status(404).json({ message: "User not found" });
     }
 
-  // update only if provided
-user.name = req.body.name || user.name;
-user.email = req.body.email || user.email;
-
-if (req.body.password) {
-    user.password = req.body.password; 
-    // pre-save hook will hash automatically
+    // update only if provided
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.avatar = req.body.avatar || user.avatar;
+    user.bio = req.body.bio || user.bio;
+    
+    if (req.body.settings) {
+        user.settings = { ...user.settings, ...req.body.settings };
     }
 
-const updatedUser = await user.save();
+    if (req.body.password) {
+        user.password = req.body.password; 
+    }
 
-res.json({
-    _id: updatedUser._id,
-    name: updatedUser.name,
-    email: updatedUser.email,
-    role: updatedUser.role
+    const updatedUser = await user.save();
+
+    res.json({
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        role: updatedUser.role,
+        avatar: updatedUser.avatar,
+        bio: updatedUser.bio,
+        settings: updatedUser.settings
     });
 };

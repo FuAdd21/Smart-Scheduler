@@ -12,6 +12,15 @@ const bookingSchema = new mongoose.Schema(
       ref: "Schedule",
       required: true,
     },
+    time: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: ["confirmed", "cancelled"],
+      default: "confirmed",
+    },
   },
   { timestamps: true }
 );

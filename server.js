@@ -13,7 +13,10 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
 app.use(express.json({ strict: false }));
 app.get('/', (req, res) => res.send('API is Running'));
 
@@ -29,7 +32,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/auth', ownerRoutes)
 app.use("/api/schedules", scheduleRoutes);
 app.use('/api/profile', userRoutes)
-app.use('/api/schedules', bookingRoutes)
+app.use('/api/bookings', bookingRoutes)
 app.use(notFound);
 app.use(errorHandler);
 
