@@ -14,7 +14,7 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 dotenv.config();
 const app = express();
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: ["http://localhost:5173", "https://smart-scheduler-peach.vercel.app"],
   credentials: true
 }));
 app.use(express.json({ strict: false }));
