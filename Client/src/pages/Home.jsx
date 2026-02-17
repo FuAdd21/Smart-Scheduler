@@ -8,33 +8,46 @@ import {
   FiCheck,
   FiCheckCircle,
   FiChevronDown,
+  FiLayers,
+  FiActivity,
+  FiZap,
+  FiTrendingUp,
 } from "react-icons/fi";
 import LiveAvailability from "../components/LiveAvailability";
+import heroBg from "../assets/hero-bg-final.jpg";
 
 const capabilityCards = [
   {
     title: "Service Catalog",
-    description:
-      "Create different service types (Standard, Premium, Consultation) with custom durations and pricing.",
-    icon: FiCalendar,
+    description: "Create different service types (Standard, Premium, Consultation) with custom durations and pricing.",
+    icon: FiLayers,
+    color: "text-blue-400",
+    bg: "bg-blue-400/10",
+    glow: "shadow-[0_0_20px_rgba(96,165,250,0.4)]",
   },
   {
-    title: "Client Management",
-    description:
-      "Automatically track all clients who book with you, view their history and contact information.",
-    icon: FiDatabase,
+    title: "Client Tracking",
+    description: "Automatically track all clients who book with you, view their history and contact information.",
+    icon: FiActivity,
+    color: "text-emerald-400",
+    bg: "bg-emerald-400/10",
+    glow: "shadow-[0_0_20px_rgba(52,211,153,0.4)]",
   },
   {
     title: "Real-time Booking",
-    description:
-      "Clients can view your available slots and book instantly without back-and-forth emails.",
-    icon: FiBell,
+    description: "Clients can view your available slots and book instantly without back-and-forth emails.",
+    icon: FiZap,
+    color: "text-amber-400",
+    bg: "bg-amber-400/10",
+    glow: "shadow-[0_0_20px_rgba(251,191,36,0.4)]",
   },
   {
-    title: "Owner Dashboard",
-    description:
-      "Monitor your bookings, manage your calendar, and track client activity from one central hub.",
-    icon: FiShield,
+    title: "Owner Insights",
+    description: "Monitor your bookings, manage your calendar, and track client activity from one central hub.",
+    icon: FiTrendingUp,
+    color: "text-purple-400",
+    bg: "bg-purple-400/10",
+    glow: "shadow-[0_0_20px_rgba(167,139,250,0.4)]",
   },
 ];
 
@@ -179,8 +192,21 @@ const Home = () => {
       </div>
 
       <main className="relative z-10">
-        <header className="border-b border-[#101a36] pb-[72px] pt-32">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
+        <div className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300" 
+             style={{ background: 'radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(29, 78, 216, 0.06), transparent 80%)' }} />
+        
+        <header className="relative border-b border-[#101a36] pb-16 pt-24 overflow-hidden">
+          {/* Background Image Layer */}
+          <div className="absolute inset-0 z-0 select-none pointer-events-none">
+            <img 
+              src={heroBg} 
+              alt="" 
+              className="h-full w-full object-cover opacity-100 brightness-110"
+            />
+            {/* No Overlays - 100% As Is per user request */}
+          </div>
+
+          <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
             <div className="inline-flex items-center rounded-full border border-[#2453ff]/70 bg-[#08143a] px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#7ea0ff]">
               Simple. Professional. Effective.
             </div>
@@ -207,7 +233,7 @@ const Home = () => {
               </Link>
             </div>
 
-            <div className="mx-auto mt-14 max-w-5xl rounded-3xl border border-white/10 bg-[#0a1122]/50 p-3 shadow-[0_45px_100px_rgba(1,4,25,0.9)] backdrop-blur-sm">
+            <div className="mx-auto mt-10 max-w-5xl rounded-3xl border border-white/10 bg-[#0a1122]/50 p-3 shadow-[0_45px_100px_rgba(1,4,25,0.9)] backdrop-blur-sm">
               <div className="relative overflow-hidden rounded-[22px] border border-white/5 bg-[#030712] p-8 md:p-16">
                 {/* Background Glows */}
                 <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-blue-600/10 blur-[100px]" />
@@ -370,123 +396,222 @@ const Home = () => {
           </div>
         </section>
 
-        <section id="features" className="border-b border-[#101a36] py-20">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-center text-3xl font-semibold text-white sm:text-4xl">
-              Everything you need to manage bookings
-            </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-[#95a5c2]">
-              Built for professionals who value their time. No complexity, just results.
-            </p>
+        <section id="features" className="border-b border-white/5 py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">
+                The smart way to <span className="text-[#3b59ff]">manage your time</span>
+              </h2>
+              <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-400">
+                Built for professionals who value their time. No complexity, just results.
+              </p>
+            </div>
 
-            <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              {capabilityCards.map((card) => (
-                <article
-                  key={card.title}
-                  className="rounded-2xl border border-[#1a243e] bg-[#0b1325] p-5"
-                >
-                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[#121e3c] text-[#4b6cff]">
-                    <card.icon className="h-[18px] w-[18px]" />
-                  </span>
-                  <h3 className="mt-4 text-lg font-semibold text-white">
-                    {card.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-6 text-[#8ea0bf]">
-                    {card.description}
-                  </p>
-                </article>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-6 md:grid-rows-2 gap-4 h-full">
+              {/* Large Feature 1 */}
+              {(() => {
+                const Icon = capabilityCards[0].icon;
+                return (
+                  <article className="md:col-span-4 md:row-span-1 group relative rounded-3xl border border-white/10 bg-[#0a1122]/40 p-8 hover:bg-[#0a1122]/60 transition-all duration-500 shadow-2xl overflow-hidden backdrop-blur-sm">
+                    <div className="relative z-10 flex flex-col h-full justify-between">
+                      <div>
+                        <span className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl ${capabilityCards[0].bg} ${capabilityCards[0].color} ${capabilityCards[0].glow} mb-6 transition-transform group-hover:scale-110 duration-500`}>
+                          <Icon className="h-6 w-6" />
+                        </span>
+                        <h3 className="text-2xl font-bold text-white mb-3">{capabilityCards[0].title}</h3>
+                        <p className="text-slate-400 text-base leading-relaxed max-w-md">
+                          {capabilityCards[0].description}
+                        </p>
+                      </div>
+                      <div className="mt-8 flex items-center gap-2 text-sm font-semibold text-[#3b59ff] group-hover:translate-x-1 transition-transform">
+                        <span>Explore Catalog</span>
+                        <span>→</span>
+                      </div>
+                    </div>
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 blur-[80px] rounded-full translate-x-1/2 -translate-y-1/2" />
+                  </article>
+                );
+              })()}
+
+              {/* Small Feature 1 */}
+              {(() => {
+                const Icon = capabilityCards[1].icon;
+                return (
+                  <article className="md:col-span-2 md:row-span-1 group relative rounded-3xl border border-white/10 bg-[#0a1122]/40 p-8 hover:bg-[#0a1122]/60 transition-all duration-500 backdrop-blur-sm">
+                    <span className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${capabilityCards[1].bg} ${capabilityCards[1].color} mb-6 transition-transform group-hover:rotate-12`}>
+                      <Icon className="h-5 w-5" />
+                    </span>
+                    <h3 className="text-xl font-bold text-white mb-2">{capabilityCards[1].title}</h3>
+                    <p className="text-slate-400 text-sm leading-relaxed">
+                      {capabilityCards[1].description}
+                    </p>
+                  </article>
+                );
+              })()}
+
+              {/* Small Feature 2 */}
+              {(() => {
+                const Icon = capabilityCards[2].icon;
+                return (
+                  <article className="md:col-span-2 md:row-span-1 group relative rounded-3xl border border-white/10 bg-[#0a1122]/40 p-8 hover:bg-[#0a1122]/60 transition-all duration-500 backdrop-blur-sm">
+                    <span className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${capabilityCards[2].bg} ${capabilityCards[2].color} mb-6 transition-transform group-hover:scale-110`}>
+                      <Icon className="h-5 w-5" />
+                    </span>
+                    <h3 className="text-xl font-bold text-white mb-2">{capabilityCards[2].title}</h3>
+                    <p className="text-slate-400 text-sm leading-relaxed">
+                      {capabilityCards[2].description}
+                    </p>
+                  </article>
+                );
+              })()}
+
+              {/* Large Feature 2 */}
+              {(() => {
+                const Icon = capabilityCards[3].icon;
+                return (
+                  <article className="md:col-span-4 md:row-span-1 group relative rounded-3xl border border-white/10 bg-[#0a1122]/40 p-8 hover:bg-[#0a1122]/60 transition-all duration-500 shadow-2xl overflow-hidden backdrop-blur-sm">
+                    <div className="relative z-10 flex flex-col h-full justify-between">
+                      <div>
+                        <span className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl ${capabilityCards[3].bg} ${capabilityCards[3].color} ${capabilityCards[3].glow} mb-6 transition-transform group-hover:scale-110 duration-500`}>
+                          <Icon className="h-6 w-6" />
+                        </span>
+                        <h3 className="text-2xl font-bold text-white mb-3">{capabilityCards[3].title}</h3>
+                        <p className="text-slate-400 text-base leading-relaxed max-w-md">
+                          {capabilityCards[3].description}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/5 blur-[80px] rounded-full -translate-x-1/2 translate-y-1/2" />
+                  </article>
+                );
+              })()}
             </div>
           </div>
         </section>
 
-        <section id="solutions" className="border-b border-[#101a36] py-20">
-          <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:px-8">
-            <div>
-              <h2 className="max-w-md text-4xl font-semibold leading-tight text-white">
-                Perfect for service-based professionals.
-              </h2>
-              <div className="mt-8 space-y-3">
-                {industryCards.map((card) => (
+        <section id="solutions" className="border-b border-white/5 py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-20 items-center">
+              <div>
+                <h2 className="text-4xl font-bold leading-tight text-white mb-8">
+                  Designed for <span className="text-[#3b59ff]">every industry</span> that values time.
+                </h2>
+                <div className="space-y-6">
+                  {industryCards.map((card, idx) => (
+                    <article
+                      key={idx}
+                      className="group relative rounded-2xl border border-white/5 bg-white/[0.02] p-6 hover:bg-white/[0.05] transition-all duration-300"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#3b59ff]/10 text-[#3b59ff] group-hover:scale-110 transition-transform">
+                          <span className="text-sm font-bold">{idx + 1}</span>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-bold text-white mb-1">
+                            {card.title}
+                          </h3>
+                          <p className="text-sm leading-relaxed text-slate-400">
+                            {card.description}
+                          </p>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                {solutionTiles.map((tile, idx) => (
                   <article
-                    key={card.title}
-                    className="rounded-2xl border border-[#1a243e] bg-[#0b1325] p-5"
+                    key={idx}
+                    className={`group relative overflow-hidden rounded-[2rem] border border-white/10 ${tile.className} shadow-2xl`}
                   >
-                    <h3 className="text-base font-semibold text-white">
-                      {card.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-6 text-[#8fa0bf]">
-                      {card.description}
-                    </p>
+                    <img
+                      src={tile.image}
+                      alt={tile.title}
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#030714] via-[#030714]/20 to-transparent transition-opacity duration-500 group-hover:opacity-80" />
+                    
+                    <div className="absolute inset-0 p-6 flex flex-col justify-end">
+                      <div className="translate-y-4 transition-transform duration-500 group-hover:translate-y-0">
+                        <p className="text-sm font-bold tracking-widest text-[#3b59ff] uppercase mb-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                          Solution
+                        </p>
+                        <h4 className="text-xl font-bold text-white">
+                          {tile.title}
+                        </h4>
+                      </div>
+                    </div>
                   </article>
                 ))}
               </div>
             </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              {solutionTiles.map((tile) => (
-                <article
-                  key={tile.title}
-                  className={`group relative overflow-hidden rounded-2xl border border-[#24304d] ${tile.className}`}
-                >
-                  <img
-                    src={tile.image}
-                    alt={tile.title}
-                    loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover grayscale"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-black/10" />
-                  <div className="absolute bottom-3 left-3 rounded-lg bg-black/55 px-2.5 py-1 text-xs font-medium text-white backdrop-blur">
-                    {tile.title}
-                  </div>
-                </article>
-              ))}
-            </div>
           </div>
         </section>
 
-        <section id="enterprise" className="border-b border-[#101a36] py-20">
-          <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#6f7e98]">
-              Trusted by professionals worldwide
+        <section id="social-proof" className="border-b border-white/5 py-24 overflow-hidden">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <p className="text-center text-xs font-bold uppercase tracking-[0.3em] text-slate-500 mb-12">
+              Trusted by 10,000+ top-tier professionals
             </p>
-            <div className="mx-auto mt-6 grid max-w-xl grid-cols-5 gap-2">
-              {trustImages.map((image) => (
-                <div
-                  key={image}
-                  className="h-11 overflow-hidden rounded-md border border-[#1f2b48] bg-[#091225]"
-                >
-                  <img
-                    src={image}
-                    alt="Trusted company"
-                    loading="lazy"
-                    className="h-full w-full object-cover opacity-80 grayscale"
-                  />
-                </div>
-              ))}
+            
+            {/* Logo Marquee */}
+            <div className="pause-on-hover relative flex w-full flex-col items-center justify-center overflow-hidden">
+              <div className="flex animate-marquee gap-12 whitespace-nowrap lg:gap-24 items-center">
+                {[...trustImages, ...trustImages].map((image, idx) => (
+                  <div key={idx} className="h-10 w-24 shrink-0 overflow-hidden lg:h-12 lg:w-32">
+                    <img
+                      src={image}
+                      alt="Trusted brand"
+                      className="h-full w-full object-contain opacity-30 grayscale brightness-200 transition-opacity hover:opacity-100"
+                    />
+                  </div>
+                ))}
+              </div>
+              {/* Fade masks */}
+              <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#030714] to-transparent z-10" />
+              <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#030714] to-transparent z-10" />
             </div>
 
-            <article className="mx-auto mt-8 rounded-3xl border border-[#1f2a46] bg-[#0b1325] px-6 py-10 shadow-[0_30px_80px_rgba(2,6,16,0.75)] sm:px-12">
-              <p className="text-2xl text-[#3760ff]">,,</p>
-              <blockquote className="mt-2 text-xl font-medium leading-8 text-white">
-                "SmartScheduler eliminated the back-and-forth emails with clients. They just pick a time that works, and I show up. It's saved me hours every week."
-              </blockquote>
-              <div className="mt-7 flex items-center justify-center gap-3">
-                <img
-                  src="https://cdn.pixabay.com/photo/2015/06/11/11/39/businessman-805767_1280.jpg"
-                  alt="Sarah Chen"
-                  className="h-10 w-10 rounded-full object-cover"
-                />
-                <div className="text-left">
-                  <p className="text-sm font-semibold text-white">Sarah Chen</p>
-                  <p className="text-xs text-[#8da0c3]">Business Coach</p>
+            <div className="mt-24 mx-auto max-w-4xl">
+              <article className="group relative rounded-[40px] border border-white/10 bg-[#0a1122]/50 p-12 lg:p-16 shadow-2xl backdrop-blur-xl overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#3b59ff]/10 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2" />
+                
+                <div className="relative z-10 flex flex-col items-center text-center">
+                  <div className="mb-8 flex justify-center gap-1">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <span key={s} className="text-amber-400 text-lg">★</span>
+                    ))}
+                  </div>
+                  
+                  <blockquote className="text-2xl font-semibold leading-relaxed text-white md:text-3xl italic">
+                    "SmartScheduler eliminated the back-and-forth emails. They just pick a time that works, and I show up. It's saved me <span className="text-[#3b59ff]">8 hours every single week</span>."
+                  </blockquote>
+
+                  <div className="mt-12 flex items-center gap-4">
+                    <div className="relative">
+                      <img
+                        src="https://cdn.pixabay.com/photo/2015/06/11/11/39/businessman-805767_1280.jpg"
+                        alt="Sarah Chen"
+                        className="h-14 w-14 rounded-full object-cover border-2 border-white/10 transition-transform group-hover:scale-110 duration-500"
+                      />
+                      <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-blue-500 text-[10px] text-white shadow-lg border-2 border-[#030714]">
+                        ✓
+                      </span>
+                    </div>
+                    <div className="text-left">
+                      <p className="text-lg font-bold text-white">Sarah Chen</p>
+                      <p className="text-sm font-medium text-slate-500">Business Coach & Consultant</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </article>
+              </article>
+            </div>
           </div>
         </section>
 
-        <section id="live-slots" className="border-b border-[#101a36] py-20">
+        <section id="live-slots" className="border-b border-[#101a36] py-16">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#6f7e98]">
@@ -504,56 +629,18 @@ const Home = () => {
           </div>
         </section>
 
-        <section id="pricing" className="scroll-mt-28 border-t border-[#1F2937]/50 py-24">
-          <div className="mx-auto max-w-7xl px-6">
-            <div className="text-center">
-              <h2 className="text-4xl font-bold tracking-tight text-white md:text-6xl">
-                Simple, Transparent Pricing
+        <section id="pricing" className="py-24 bg-gradient-to-b from-transparent via-blue-900/5 to-transparent">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl mb-6">
+                Simple, <span className="text-blue-500">transparent</span> pricing.
               </h2>
-              <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-400">
-                Choose the plan that&apos;s right for your business. Whether
-                you&apos;re a solo pro or a global enterprise, we&apos;ve got you
-                covered.
+              <p className="mx-auto max-w-2xl text-lg text-slate-400">
+                Choose the plan that's right for your business. All plans include our core booking engine.
               </p>
-
-              <div className="mb-16 mt-12 flex items-center justify-center gap-4">
-                <button
-                  type="button"
-                  onClick={() => setAnnualBilling(false)}
-                  className={`text-sm font-medium transition-colors ${
-                    annualBilling ? "text-slate-400" : "text-white"
-                  }`}
-                >
-                  Monthly
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setAnnualBilling((prev) => !prev)}
-                  className="relative h-7 w-14 rounded-full bg-[#1F2937] p-1"
-                  aria-label="Toggle annual billing"
-                >
-                  <span
-                    className={`absolute top-1 h-5 w-5 rounded-full bg-[#1b1ee4] transition-all ${
-                      annualBilling ? "right-1" : "left-1"
-                    }`}
-                  />
-                </button>
-                <div className="flex items-center gap-2">
-                  <span
-                    className={`text-sm font-medium ${
-                      annualBilling ? "text-white" : "text-slate-400"
-                    }`}
-                  >
-                    Annual
-                  </span>
-                  <span className="rounded-full bg-[#1b1ee4]/20 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-[#4f67ff]">
-                    Save 20%
-                  </span>
-                </div>
-              </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-8 text-left md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
               {pricingPlans.map((plan) => (
                 <article
                   key={plan.name}
@@ -677,7 +764,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="mt-24 bg-slate-900/20 py-24">
+          <div className="mt-16 bg-slate-900/20 py-20">
             <div className="mx-auto max-w-3xl px-6">
               <h3 className="mb-12 text-center text-4xl font-bold text-white">
                 Frequently Asked Questions
