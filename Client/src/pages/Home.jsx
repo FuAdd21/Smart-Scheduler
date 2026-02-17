@@ -207,65 +207,74 @@ const Home = () => {
               </Link>
             </div>
 
-            <div className="mx-auto mt-14 max-w-5xl rounded-2xl border border-white/10 bg-[#0a1122] p-3 shadow-[0_35px_90px_rgba(1,4,14,0.8)]">
-              <div className="rounded-2xl border border-black/20 bg-[#e5ddd6] p-5 sm:p-9 md:p-14">
-                <div className="relative mx-auto overflow-hidden rounded-2xl border border-[#d6d7db] bg-[#f2f3f5] p-4 shadow-[0_18px_50px_rgba(0,0,0,0.18)] sm:p-6">
-                  <div className="mb-4 border-b border-[#d7dbe2] pb-4 text-left">
+            <div className="mx-auto mt-14 max-w-5xl rounded-3xl border border-white/10 bg-[#0a1122]/50 p-3 shadow-[0_45px_100px_rgba(1,4,25,0.9)] backdrop-blur-sm">
+              <div className="relative overflow-hidden rounded-[22px] border border-white/5 bg-[#030712] p-8 md:p-16">
+                {/* Background Glows */}
+                <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-blue-600/10 blur-[100px]" />
+                <div className="absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-indigo-600/10 blur-[100px]" />
+
+                <div className="relative mx-auto max-w-lg rounded-2xl border border-white/10 bg-[#0a1122]/80 p-6 shadow-2xl backdrop-blur-md">
+                  <div className="mb-6 border-b border-white/10 pb-5 text-left">
                     <div className="flex items-center justify-between">
-                      <p className="text-[19px] font-semibold text-[#1f2f3f]">
+                      <p className="text-xl font-bold tracking-tight text-white">
                         Product Designers
                       </p>
-                      <p className="text-xl leading-none text-[#97a5b8]">=</p>
-                    </div>
-                    <p className="mt-3 text-sm text-[#7f8ea3]">
-                      Dedicated calendar
-                    </p>
-                  </div>
-
-                  <div className="overflow-hidden rounded-xl border border-[#d5dce6] bg-white">
-                    <div className="flex h-11 items-center justify-between bg-[#0f8084] px-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#d8f8f8]">
-                      <p>Schedule</p>
-                      <div className="flex items-center gap-3 text-sm normal-case tracking-normal text-[#caf0f0]">
-                        <span>Q</span>
-                        <span>&#9906;</span>
-                        <span>o</span>
+                      <div className="flex h-6 w-6 items-center justify-center rounded-md bg-white/5 text-slate-400">
+                        <FiChevronDown />
                       </div>
                     </div>
-
-                    {["Weekly booking options", "Price optimization", "Data insights"].map(
-                      (item) => (
-                        <div
-                          key={item}
-                          className="flex h-16 items-center justify-between border-b border-[#e2e8ef] px-5 text-left text-[#35475b] last:border-b-0"
-                        >
-                          <div className="flex items-center gap-3">
-                            <span className="h-3.5 w-3.5 rounded-full border border-[#97a7ba]" />
-                            <p className="text-sm font-medium">{item}</p>
-                          </div>
-                          <span className="text-[#8ea0b4]">+/-</span>
-                        </div>
-                      )
-                    )}
-                  </div>
-
-                  <div className="absolute -left-5 bottom-6 hidden rounded-xl border border-white/50 bg-white/80 p-3 text-left shadow-[0_16px_30px_rgba(31,41,55,0.15)] backdrop-blur md:block">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#76869b]">
-                      Monthly Meetings
+                    <p className="mt-2 text-sm text-slate-400">
+                      Global Team Availability
                     </p>
-                    <p className="mt-2 text-xs text-[#8b99ac]">32% booked rate</p>
-                    <p className="text-xs text-[#8b99ac]">Avg. session 54 min</p>
-                    <p className="text-xs text-[#8b99ac]">+18% growth</p>
                   </div>
 
-                  <div className="absolute right-2 top-[104px] hidden min-w-[208px] items-center gap-2 rounded-full border border-[#dce3ef] bg-white px-3 py-2 text-left shadow-[0_14px_35px_rgba(30,42,74,0.2)] md:flex">
-                    <span className="h-8 w-8 rounded-full bg-gradient-to-br from-[#8db1ff] to-[#2a48ff]" />
-                    <div>
-                      <p className="text-[10px] uppercase tracking-[0.12em] text-[#7c8ba2]">
-                        Revenue
-                      </p>
-                      <p className="text-sm font-semibold text-[#1e2d43]">
-                        +12,450.00
-                      </p>
+                  <div className="space-y-3">
+                    {[
+                      { label: "Weekly booking sync", status: "active", color: "bg-emerald-500" },
+                      { label: "Availability optimization", status: "pending", color: "bg-blue-500" },
+                      { label: "Client data insights", status: "active", color: "bg-emerald-500" },
+                    ].map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] p-4 text-left transition hover:bg-white/[0.05]"
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className={`h-2.5 w-2.5 rounded-full ${item.color} shadow-[0_0_8px_rgba(16,185,129,0.5)]`} />
+                          <p className="text-sm font-medium text-slate-200">{item.label}</p>
+                        </div>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                          {item.status}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Floating Badges */}
+                  <div className="absolute -left-12 bottom-12 hidden rounded-2xl border border-white/10 bg-[#0d152b]/90 p-5 shadow-2xl backdrop-blur-xl md:block animate-bounce-slow">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400">
+                        <FiCheckCircle className="h-6 w-6" />
+                      </div>
+                      <div className="text-left">
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                          Session Rate
+                        </p>
+                        <p className="text-lg font-bold text-white">98.4%</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="absolute -right-16 top-12 hidden rounded-2xl border border-white/10 bg-[#0d152b]/95 p-5 shadow-2xl backdrop-blur-xl md:block animate-float">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/10 text-blue-400">
+                        <FiCalendar className="h-6 w-6" />
+                      </div>
+                      <div className="text-left">
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                          Bookings
+                        </p>
+                        <p className="text-lg font-bold text-white">+24.5k</p>
+                      </div>
                     </div>
                   </div>
                 </div>
